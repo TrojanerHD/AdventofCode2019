@@ -21,10 +21,10 @@ function main () {
         const overrideElement = parseInt(array[count + 3])
         switch (parseInt(opcode)) {
           case 1:
-            array[overrideElement] = parseInt(array[firstElement]) + parseInt(array[secondElement])
+            array[overrideElement] = (parseInt(array[firstElement]) + parseInt(array[secondElement])).toString()
             break
           case 2:
-            array[overrideElement] = parseInt(array[firstElement]) * parseInt(array[secondElement])
+            array[overrideElement] = (parseInt(array[firstElement]) * parseInt(array[secondElement])).toString()
             break
           case 99:
             console.log(`[Day 2] The first element's value is ${array[0]}`)
