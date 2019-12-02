@@ -24,7 +24,7 @@ function main () {
       }
     }
 
-    console.log(`Total fuel (part 1 of the puzzle): ${total}`)
-    console.log(`Total fuel with fuel for fuel etc. (part 2 of the puzzle): ${totalWithFuelForFuel}`)
+    console.log(`[Day 1] Total fuel (part 1 of the puzzle): ${total}`)
+    console.log(`[Day 1] Total fuel with fuel for fuel etc. (part 2 of the puzzle): ${totalWithFuelForFuel}`)
   })
 }
