@@ -1,5 +1,4 @@
 const fs = require('fs')
-const distance = require('manhattan')
 
 class CoordinateSystem {
   constructor () {
@@ -7,8 +6,9 @@ class CoordinateSystem {
   }
 
   pointExists (point) {
+    if (point.x === 0 && point.y === 0) return false
     for (const value of this._values)
-      if (value.x === point.x && value.y === point.y && (point.x !== 0 && point.y !== 0)) return true
+      if (value.x === point.x && value.y === point.y) return true
     return false
   }
 
@@ -73,7 +73,7 @@ function main () {
     let minimumDistance
     for (const point of firstValues._values) {
       if (secondValues.pointExists(point)) {
-        const pointDistance = distance([point.x, point.y], [0, 0])
+        const pointDistance = Math.abs(point.x) + Math.abs(point.y)
         if (!minimumDistance || pointDistance < minimumDistance) {
           minimumDistance = pointDistance
         }

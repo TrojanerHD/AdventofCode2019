@@ -4,7 +4,5 @@
   "main": "index.js",
   "author": "Trojaner",
   "license": "MIT",
-  "dependencies": {
-    "manhattan": "^1.0.0"
-  }
+  "dependencies": {}
 }
