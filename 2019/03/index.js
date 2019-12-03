@@ -12,6 +12,15 @@ class CoordinateSystem {
     return false
   }
 
+  multiplePointsOnSamePosition (point) {
+    for (let i = 0; i < this._values.length; i++) {
+      if (this._values[i].x === point.x && this._values[i].y === point.y) {
+        return i
+      }
+    }
+    return false
+  }
+
   generateToPoint (direction, value) {
     const { x, y } = this._values[this._values.length - 1]
     let count = 0
@@ -71,14 +80,41 @@ function main () {
       count++
     }
     let minimumDistance
-    for (const point of firstValues._values) {
+    for (const point of firstValues._values)
       if (secondValues.pointExists(point)) {
         const pointDistance = Math.abs(point.x) + Math.abs(point.y)
-        if (!minimumDistance || pointDistance < minimumDistance) {
-          minimumDistance = pointDistance
-        }
+        if (!minimumDistance || pointDistance < minimumDistance) minimumDistance = pointDistance
       }
-    }
-    console.log(`[Day 3] The minimum count to the next intersection is ${minimumDistance}`)
+    console.log(`[Day 3] Part 1: The next intersection with the smallest Manhattan distance is ${minimumDistance}`)
+    const bestSteps = calculateSteps(firstValues, secondValues) + calculateSteps(secondValues, firstValues)
+    console.log(`[Day 3] Part 2: In total, it requires ${bestSteps} steps to get to the central point`)
   })
+}
+
+function calculateSteps (values, otherValues) {
+  let steps = 0
+  let bestSteps
+  for (let i = 0; i < values._values.length; i++) {
+    if (otherValues.pointExists(values._values[i])) {
+      // let currentX = values._values[i].x,
+      //   currentY = values._values[i].y
+      while (values._values[i - steps] !== values._values[0]) {
+        steps++
+        /*const shortCutExists = values.multiplePointsOnSamePosition({
+          x: values._values[i - steps].x,
+          y: values._values[i - steps].y
+        })
+        if (shortCutExists) {
+          currentX = values._values[shortCutExists].x
+          currentY = values._values[shortCutExists].y
+        } else {*/
+        // currentX = values._values[i - steps].x
+        // currentY = values._values[i - steps].y
+        // }
+      }
+      if (!bestSteps || bestSteps > steps)
+        bestSteps = steps
+    }
+  }
+  return bestSteps
 }
