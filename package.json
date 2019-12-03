@@ -3,5 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "author": "Trojaner",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "manhattan": "^1.0.0"
+  }
 }
