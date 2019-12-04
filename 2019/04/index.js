@@ -9,7 +9,7 @@ function main () {
     let skip = false
     let notSkip = false
     for (const digit of currentInput.toString().split('')) {
-      if (parseInt(digit) > maxInput) {
+      if (parseInt(digit) < maxValue) {
         skip = true
         break
       }
@@ -20,5 +20,5 @@ function main () {
     if (skip || !notSkip) continue
     solutionNumber++
   }
-  console.log(`[Day 4] The number of possible solutions is ${solutionNumber}`)
+  console.log(`[Day 4] Part 1: The number of possible solutions is ${solutionNumber}`)
 }
