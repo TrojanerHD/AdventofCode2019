@@ -107,7 +107,7 @@ function main () {
         // currentX = values._values[i - steps].x
         // currentY = values._values[i - steps].y
         // }
-        if (bestSteps.first > i && bestSteps.second > otherPoint) {
+        if (bestSteps.first + bestSteps.second > i + otherPoint) {
           bestSteps.first = i
           bestSteps.second = otherPoint
         }
