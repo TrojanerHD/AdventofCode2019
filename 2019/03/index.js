@@ -86,20 +86,16 @@ function main () {
         if (!minimumDistance || pointDistance < minimumDistance) minimumDistance = pointDistance
       }
     console.log(`[Day 3] Part 1: The next intersection with the smallest Manhattan distance is ${minimumDistance}`)
-    const bestSteps = calculateSteps(firstValues, secondValues) + calculateSteps(secondValues, firstValues)
-    console.log(`[Day 3] Part 2: In total, it requires ${bestSteps} steps to get to the central point`)
-  })
-}
+    let steps = 0
+    let bestSteps = { first: Infinity, second: Infinity }
+    for (let i = 0; i < firstValues._values.length; i++) {
+      const otherPoint = secondValues.multiplePointsOnSamePosition(firstValues._values[i])
+      if (otherPoint) {
 
-function calculateSteps (values, otherValues) {
-  let steps = 0
-  let bestSteps
-  for (let i = 0; i < values._values.length; i++) {
-    if (otherValues.pointExists(values._values[i])) {
-      // let currentX = values._values[i].x,
-      //   currentY = values._values[i].y
-      while (values._values[i - steps] !== values._values[0]) {
-        steps++
+        // let currentX = values._values[i].x,
+        //   currentY = values._values[i].y
+        // while (firstValues._values[steps] !== firstValues._values[i]) {
+        //   steps++
         /*const shortCutExists = values.multiplePointsOnSamePosition({
           x: values._values[i - steps].x,
           y: values._values[i - steps].y
@@ -111,10 +107,18 @@ function calculateSteps (values, otherValues) {
         // currentX = values._values[i - steps].x
         // currentY = values._values[i - steps].y
         // }
+        if (bestSteps.first > i && bestSteps.second > otherPoint) {
+          bestSteps.first = i
+          bestSteps.second = otherPoint
+        }
       }
-      if (!bestSteps || bestSteps > steps)
-        bestSteps = steps
+
+      // }
     }
-  }
-  return bestSteps
+    console.log(`[Day 3] Part 2: In total, it requires ${bestSteps.first + bestSteps.second} steps to get to the central point`)
+  })
+}
+
+function calculateSteps (values, otherValues) {
+
 }
