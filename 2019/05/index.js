@@ -8,12 +8,14 @@ function main () {
       console.error(err)
       return
     }
-    const array = data.split(',')
-    parseIntCode(array)
+    let array = data.split(',')
+    parseIntCode(array, '1', '1')
+    array = data.split(',')
+    parseIntCode(array, '5', '2')
   }))
 }
 
-function parseIntCode (array) {
+function parseIntCode (array, input, context) {
   for (let i = 0; i < array.length; i++) {
     let opcode = array[i]
     while (opcode.split('').length < 5) opcode = `0${opcode}`
@@ -32,11 +34,11 @@ function parseIntCode (array) {
         i += 3
         break
       case 3:
-        array[firstParameter] = '5'
+        array[firstParameter] = input
         i += 1
         break
       case 4:
-        console.log(parameterMode[2] === '0' ? array[firstParameter] : firstParameter)
+        console.log(`[Day 5] Part ${context}: ${parameterMode[2] === '0' ? array[firstParameter] : firstParameter}`)
         i += 1
         break
       case 5:
