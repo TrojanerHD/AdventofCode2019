@@ -31,11 +31,11 @@ function parseIntCode (array) {
     let done = false
     switch (parseInt(opcode.substr(opcode.length - 2, opcode.length - 1))) {
       case 1:
-        array[overrideElement] = ((parameterMode[0] === '0' ? parseInt(array[firstElement]) : firstElement) + (parameterMode[1] === '0' ? parseInt(array[secondElement]) : secondElement)).toString()
+        array[overrideElement] = ((parameterMode[2] === '0' ? parseInt(array[firstElement]) : firstElement) + (parameterMode[1] === '0' ? parseInt(array[secondElement]) : secondElement)).toString()
         increase = 3
         break
       case 2:
-        array[overrideElement] = ((parameterMode[0] === '0' ? parseInt(array[firstElement]) : firstElement) * (parameterMode[1] === '0' ? parseInt(array[secondElement]) : secondElement)).toString()
+        array[overrideElement] = ((parameterMode[2] === '0' ? parseInt(array[firstElement]) : firstElement) * (parameterMode[1] === '0' ? parseInt(array[secondElement]) : secondElement)).toString()
         increase = 3
         break
       case 3:
@@ -43,7 +43,7 @@ function parseIntCode (array) {
         increase = 1
         break
       case 4:
-        console.log(parameterMode[3] === '0' ? array[firstElement] : firstElement)
+        console.log(parameterMode[2] === '0' ? array[firstElement] : firstElement)
         increase = 1
         break
       case 99:
