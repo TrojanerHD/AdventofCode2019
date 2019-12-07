@@ -19,10 +19,16 @@ function main () {
 
     for (const key of Object.keys(results)) {
       const valueArray = results[key]
-      if (valueArray.includes(key)) continue
+      let skip = false
+      for (const value of Object.values(results)) {
+        if (value.includes(key)) {
+          skip = true
+          break
+        }
+      }
+      if (skip) continue
       const count = getOrbits(results, key, 0)
       console.log(count)
-      break
     }
   })
 }
