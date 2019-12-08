@@ -11,4 +11,4 @@ My personal solutions of the [Advent of code](https://adventofcode.com/) challen
 + LeMoonStar's [AdventOfCode2019Solutions](https://github.com/LeMoonStar/AdventOfCode2019Solutions)
 + DCDragonCoder's [AdventOfCode2019](https://github.com/DragonCoder01/AdventOfCode2019)
 + FeldiM's [AdventOfCode19](https://github.com/feldim2425/AdventOfCode19)
-+ Daan Bruer's [AdventOfCode2019](https://github.com/daanbreur/AdventOfCode2019)
++ Daan Breur's [AdventOfCode2019](https://github.com/daanbreur/AdventOfCode2019)
