@@ -30,33 +30,55 @@ class intCode {
       const parameterMode = opcode.split('')
       let firstParameter
       let secondParameter
+      let overrideParameter
+      let firstParameterAccessor
+      let secondParameterAccessor
       switch (parameterMode[2]) {
         case '0':
-          firstParameter = this._array[parseInt(this._array[i + 1])]
+          firstParameterAccessor = parseInt(this._array[i + 1])
+          firstParameter = this._array[firstParameterAccessor]
           break
         case '1':
-          firstParameter = this._array[i + 1]
+          firstParameterAccessor = i + 1
+          firstParameter = this._array[firstParameterAccessor]
           break
         case '2':
-          firstParameter = this._array[this._relativeBase + parseInt(this._array[i + 1])]
+          firstParameterAccessor = this._relativeBase + parseInt(this._array[i + 1])
+          firstParameter = this._array[firstParameterAccessor]
           break
       }
       switch (parameterMode[1]) {
         case '0':
-          secondParameter = this._array[parseInt(this._array[i + 2])]
+          secondParameterAccessor = parseInt(this._array[i + 2])
+          secondParameter = this._array[secondParameterAccessor]
           break
         case '1':
-          secondParameter = this._array[i + 2]
+          secondParameterAccessor = i + 2
+          secondParameter = this._array[secondParameterAccessor]
           break
         case '2':
-          secondParameter = this._array[this._relativeBase + parseInt(this._array[i + 2])]
+          secondParameterAccessor = this._relativeBase + parseInt(this._array[i + 2])
+          secondParameter = this._array[secondParameterAccessor]
           break
       }
+
+      switch (parameterMode[0]) {
+        case '0':
+          overrideParameter = parseInt(this._array[i + 3])
+          break
+        case '1':
+          overrideParameter = i + 3
+          break
+        case '2':
+          overrideParameter = this._relativeBase + parseInt(this._array[i + 3])
+          break
+      }
+
       if (firstParameter === undefined) firstParameter = 0
       else firstParameter = parseInt(firstParameter)
       if (secondParameter === undefined) secondParameter = 0
       else secondParameter = parseInt(secondParameter)
-      const overrideParameter = parseInt(this._array[i + 3])
+
       let done = false
       switch (parseInt(opcode.substr(opcode.length - 2, opcode.length - 1))) {
         case 1:
@@ -68,7 +90,7 @@ class intCode {
           i += 3
           break
         case 3:
-          this._array[firstParameter] = this._input
+          this._array[firstParameterAccessor] = this._input
           i += 1
           break
         case 4:
