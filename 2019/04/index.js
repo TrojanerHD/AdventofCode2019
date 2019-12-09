@@ -1,8 +1,9 @@
 module.exports = main
 
-function main () {
-  let currentInput = 145852
-  const maxInput = 616942
+function main (data) {
+  const values = data.split(/\r?\n/g)
+  let currentInput = values[0]
+  const maxInput = values[1]
   let solutionNumber = 0,
     solutionNumberPart2 = 0
   while (currentInput <= maxInput) {
@@ -36,6 +37,6 @@ function main () {
     solutionNumber++
     if (hasDouble) solutionNumberPart2++
   }
-  console.log(`[Day 4] Part 1: The number of possible solutions is ${solutionNumber}`)
-  console.log(`[Day 4] Part 2: The number of possible solutions is ${solutionNumberPart2}`)
+  const message = 'The number of possible solutions is'
+  return [{ message, value: solutionNumber }, { message, value: solutionNumberPart2 }]
 }

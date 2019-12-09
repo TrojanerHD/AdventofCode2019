@@ -1,61 +1,50 @@
-const fs = require('fs')
 let partOneDone = false,
   partTwoDone = false,
-  partTwoResult = Number.NEGATIVE_INFINITY
+  partTwoResult = Number.NEGATIVE_INFINITY,
+  result = []
 
 module.exports = main
 
-function main () {
-  fs.readFile('./values.txt', 'utf8', (err, data) => {
-    if (err) {
-      console.error(err)
-      return
-    }
-    let initialPhaseSettings = ['0', '1', '2', '3', '4']
-    let phaseSettings = ['1', '0', '2', '3', '4']
-    let highestCount = 0
-    highestCount = getResult(data, initialPhaseSettings, highestCount, true)
-    let firstRun = true
-    // noinspection InfiniteLoopJS
-    while (!partOneDone) {
-      if (firstRun) highestCount = getResult(data, phaseSettings, highestCount)
-      firstRun = false
+function main (data) {
+  let initialPhaseSettings = ['0', '1', '2', '3', '4']
+  let phaseSettings = ['1', '0', '2', '3', '4']
+  let highestCount = 0
+  highestCount = getResult(data, initialPhaseSettings, highestCount, true)
+  highestCount = getResult(data, phaseSettings, highestCount)
+  // noinspection InfiniteLoopJS
+  while (!partOneDone) {
+    highestCount = secondSwapElements(phaseSettings, highestCount, data)
+    highestCount = thirdSwapElements(phaseSettings, highestCount, data)
+    highestCount = fourthSwapElements(phaseSettings, highestCount, data)
+    highestCount = thirdSwapElements(phaseSettings, highestCount, data)
+    highestCount = secondSwapElements(phaseSettings, highestCount, data)
+  }
 
-      highestCount = secondSwapElements(phaseSettings, highestCount, data)
-      highestCount = thirdSwapElements(phaseSettings, highestCount, data)
-      highestCount = fourthSwapElements(phaseSettings, highestCount, data)
-      highestCount = thirdSwapElements(phaseSettings, highestCount, data)
-      highestCount = secondSwapElements(phaseSettings, highestCount, data)
-
-    }
-
-    initialPhaseSettings = ['5', '6', '7', '8', '9']
-    phaseSettings = ['6', '5', '7', '8', '9']
-    highestCount = 0
-    highestCount = getResult(data, initialPhaseSettings, highestCount, true)
-    while (!partTwoDone) {
-      if (firstRun) highestCount = getResult(data, phaseSettings, highestCount)
-      firstRun = false
-
-      highestCount = secondSwapElements(phaseSettings, highestCount, data)
-      highestCount = thirdSwapElements(phaseSettings, highestCount, data)
-      highestCount = fourthSwapElements(phaseSettings, highestCount, data)
-      highestCount = thirdSwapElements(phaseSettings, highestCount, data)
-      highestCount = secondSwapElements(phaseSettings, highestCount, data)
-      highestCount = fourthSwapElements(phaseSettings, highestCount, data)
-    }
-  })
+  initialPhaseSettings = ['5', '6', '7', '8', '9']
+  phaseSettings = ['6', '5', '7', '8', '9']
+  highestCount = 0
+  highestCount = getResult(data, initialPhaseSettings, highestCount, true)
+  highestCount = getResult(data, phaseSettings, highestCount)
+  while (!partTwoDone) {
+    highestCount = secondSwapElements(phaseSettings, highestCount, data)
+    highestCount = thirdSwapElements(phaseSettings, highestCount, data)
+    highestCount = fourthSwapElements(phaseSettings, highestCount, data)
+    highestCount = thirdSwapElements(phaseSettings, highestCount, data)
+    highestCount = secondSwapElements(phaseSettings, highestCount, data)
+    highestCount = fourthSwapElements(phaseSettings, highestCount, data)
+  }
+  return result
 }
 
 function getResult (data, phaseSettings, oldHighest, first, a, b, c, d, e) {
   if (!first && !partOneDone && JSON.stringify(phaseSettings) === '["0","1","2","3","4"]') {
-    console.log(`[Day 7] Part 1: Highest signal that can be sent to the thrusters: ${oldHighest}`)
+    result.push({ message: 'Highest signal that can be sent to the thrusters', value: oldHighest })
     partOneDone = true
     return 'done'
   }
 
   if (!first && !partTwoDone && JSON.stringify(phaseSettings) === '["5","6","7","8","9"]') {
-    console.log(`[Day 7] Part 2: Highest signal that can be sent to the thrusters: ${partTwoResult}`)
+    result.push({ message: 'Highest signal that can be sent to the thrusters', value: partTwoResult })
     partTwoDone = true
     return 'done'
   }

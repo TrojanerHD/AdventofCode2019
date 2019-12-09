@@ -2,38 +2,34 @@ const fs = require('fs')
 
 module.exports = main
 
-function main () {
-  fs.readFile('./values.txt', 'utf8', (err, data) => {
-    if (err) {
-      console.error(err)
-      return
-    }
+function main (data) {
+  //Part 1
+  let firstPartArray = data.split(',')
+  firstPartArray[1] = '12'
+  firstPartArray[2] = '2'
 
-    //Part 1
-    let array = data.split(',')
-    array[1] = '12'
-    array[2] = '2'
-    console.log(`[Day 2] Part 1: The first element's value is ${parseIntCode(array)}`)
+  //Part 2
+  let array = data.split(',')
 
-    //Part 2
+  let firstElementCounter = 0
+  let secondElementCounter = 0
+  let result
+  while (firstElementCounter <= 99 && secondElementCounter <= 99) {
+    array[1] = firstElementCounter.toString()
+    array[2] = secondElementCounter.toString()
+    if (parseInt(parseIntCode(array)) === 19690720) result = 100 * firstElementCounter + secondElementCounter
+
     array = data.split(',')
-
-    let firstElementCounter = 0
-    let secondElementCounter = 0
-    while (firstElementCounter <= 99 && secondElementCounter <= 99) {
-      array[1] = firstElementCounter.toString()
-      array[2] = secondElementCounter.toString()
-      if (parseInt(parseIntCode(array)) === 19690720) console.log(`[Day 2] Part 2: Calculated answer (100 * noun + verb): ${100 * firstElementCounter + secondElementCounter}`)
-
-      array = data.split(',')
-      if (firstElementCounter < 99) firstElementCounter++
-      else {
-        firstElementCounter = 0
-        secondElementCounter++
-      }
-
+    if (firstElementCounter < 99) firstElementCounter++
+    else {
+      firstElementCounter = 0
+      secondElementCounter++
     }
-  })
+  }
+  return [{
+    message: 'The first element\'s value is',
+    value: parseIntCode(firstPartArray)
+  }, { message: 'Calculated answer (100 * noun + verb)', value: result }]
 }
 
 function parseIntCode (array) {

@@ -1,19 +1,14 @@
-const fs = require('fs')
-
 module.exports = main
 
-function main () {
-  fs.readFile('./values.txt', 'utf8', ((err, data) => {
-    if (err) {
-      console.error(err)
-      return
-    }
-    let array = data.split(',')
-    const firstPart = parseIntCode(array, '1')
-    array = data.split(',')
-    const secondPart = parseIntCode(array, '5')
-    console.log(`[Day 5] Part 1: The diagnostic code without the 0s is ${firstPart}\n[Day 5] Part 2: The diagnostic code for system ID 5 is ${secondPart}`)
-  }))
+function main (data) {
+  let array = data.split(',')
+  const firstPart = parseIntCode(array, '1')
+  array = data.split(',')
+  const secondPart = parseIntCode(array, '5')
+  return [{
+    message: 'The diagnostic code without the 0s is',
+    value: firstPart
+  }, { message: 'The diagnostic code for system ID 5 is', value: secondPart }]
 }
 
 function parseIntCode (array, input) {
