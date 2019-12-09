@@ -9,13 +9,14 @@ function main () {
       return
     }
     let array = data.split(',')
-    parseIntCode(array, '1', '1')
+    const firstPart = parseIntCode(array, '1')
     array = data.split(',')
-    parseIntCode(array, '5', '2')
+    const secondPart = parseIntCode(array, '5')
+    console.log(`[Day 5] Part 1: The diagnostic code without the 0s is ${firstPart}\n[Day 5] Part 2: The diagnostic code for system ID 5 is ${secondPart}`)
   }))
 }
 
-function parseIntCode (array, input, context) {
+function parseIntCode (array, input) {
   for (let i = 0; i < array.length; i++) {
     let opcode = array[i]
     while (opcode.split('').length < 5) opcode = `0${opcode}`
@@ -38,7 +39,8 @@ function parseIntCode (array, input, context) {
         i += 1
         break
       case 4:
-        console.log(`[Day 5] Part ${context}: ${parameterMode[2] === '0' ? array[firstParameter] : firstParameter}`)
+        const returnValue = parameterMode[2] === '0' ? parseInt(array[firstParameter]) : firstParameter
+        if (returnValue !== 0) return returnValue
         i += 1
         break
       case 5:
