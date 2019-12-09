@@ -9,13 +9,15 @@ function main () {
       return
     }
 
-    const intcode = new intCode(data.split(','), '1')
-    intcode.parse()
-    for (const output of intcode._output) console.log(output)
+    for (const input of ['1', '2']) {
+      const intcode = new IntCode(data.split(','), input)
+      intcode.parse()
+      console.log(input === '1' ? `[Day 9] Part 1: The BOOST keycode is ${intcode._output[0]}` : `[Day 9] Part 2: The coordinates of the distress signals are ${intcode._output[0]}`)
+    }
   })
 }
 
-class intCode {
+class IntCode {
   constructor (array, input) {
     this._array = array
     this._input = input
