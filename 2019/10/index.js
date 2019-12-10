@@ -13,6 +13,72 @@ function main (data) {
     y++
   }
 
+  let asteroids = calculateAsteroids(values)
+  let highestCount = 0
+  let highestCountAsteroid = {}
+  for (const asteroid of asteroids) if (asteroid.length > highestCount) {
+    highestCountAsteroid = asteroid
+    highestCount = asteroid.length
+  }
+
+  const resultPart2 = { x: undefined, y: undefined }
+  let count = 0
+  while (values.length !== 1) {
+    const positiveXAndY = []
+    const positiveX = []
+    const negativeXAndY = []
+    const positiveY = []
+    for (const asteroid of highestCountAsteroid) {
+      if (asteroid.xPositive)
+        if (asteroid.yPositive)
+          positiveXAndY.push(asteroid)
+        else
+          positiveX.push(asteroid)
+      else if (asteroid.yPositive)
+        positiveY.push(asteroid)
+      else
+        negativeXAndY.push(asteroid)
+    }
+    for (const allAsteroids of asteroids) {
+      for (const asteroid of allAsteroids) {
+        for (let i = 0; i < values.length; i++) {
+          const value = values[i]
+          if (value.x === asteroid.x && value.y === asteroid.y) values.splice(i, 1)
+        }
+      }
+    }
+    for (const positiveXAndYElement of positiveXAndY) {
+      if (count === 200) console.log(positiveXAndYElement)
+      count++
+    }
+
+    for (const positiveX1 of positiveX) {
+      if (count === 200) console.log(positiveX1)
+      count++
+    }
+
+    for (const negativeXAndYElement of negativeXAndY) {
+      if (count === 200) console.log(negativeXAndYElement)
+      count++
+    }
+
+    for (const positiveYElement of positiveY) {
+      if (count === 200) console.log(positiveYElement)
+      count++
+    }
+
+    // resultPart2.x = asteroid.x
+    // resultPart2.y = asteroid.y
+    asteroids = calculateAsteroids(values)
+  }
+
+  return [{
+    message: 'The highest count of asteroids is',
+    value: highestCount
+  }, { message: 'The 200th asteroid to be vaporized (100* x + y) is at', value: resultPart2.x * 100 + resultPart2.y }]
+}
+
+function calculateAsteroids (values) {
   const allAsteroids = []
   for (let i = 0; i < values.length; i++) {
     const visibleAsteroids = []
@@ -20,21 +86,27 @@ function main (data) {
     for (let j = 0; j < values.length; j++) {
       if (i === j) continue
       const endValue = values[j]
-      let result = (endValue.y - startValue.y) / (endValue.x - startValue.x)
-      if (endValue.x - startValue.x === 0) result = Infinity
-      if (endValue.y === startValue.y) result = 0
-      const b = startValue.y - result * startValue.x
+      endValue.x -= startValue.x
+      endValue.y -= startValue.y
+
+      let gradient = endValue.y / endValue.x
+      if (endValue.x === 0) gradient = Infinity
+      if (endValue.y === 0) gradient = 0
       let skip = false
       for (const asteroid of visibleAsteroids) {
-        if (asteroid.result === result && asteroid.b === b && asteroid.xPositive === startValue.x < endValue.x && asteroid.yPositive === startValue.y < endValue.y) skip = true
+        if (asteroid.gradient === gradient && asteroid.xPositive === 0 < endValue.x && asteroid.yPositive === 0 < endValue.y) skip = true
       }
       if (skip) continue
-      visibleAsteroids.push({ result, b, xPositive: startValue.x < endValue.x, yPositive: startValue.y < endValue.y })
+      visibleAsteroids.push({
+        x: endValue.x,
+        y: endValue.y,
+        gradient,
+        xPositive: 0 < endValue.x,
+        yPositive: 0 < endValue.y
+      })
     }
-    allAsteroids.push({ x: startValue.x, y: startValue.y, visibleAsteroids: visibleAsteroids.length })
+    visibleAsteroids.sort((a, b) => a.gradient < b.gradient ? 1 : -1)
+    allAsteroids.push(visibleAsteroids)
   }
-
-  let highestCount = 0
-  for (const asteroid of allAsteroids) if (asteroid.visibleAsteroids > highestCount) highestCount = asteroid.visibleAsteroids
-  return [{ message: 'Test', value: highestCount }]
+  return allAsteroids
 }
