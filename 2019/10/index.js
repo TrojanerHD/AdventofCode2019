@@ -53,7 +53,7 @@ function main (data) {
     }
 
     for (const positiveX1 of positiveX) {
-      if (count === 200) {
+      if (count === 199) {
         resultPart2.x = highestCountAsteroid.startValue.x + positiveX1.x
         resultPart2.y = highestCountAsteroid.startValue.y + positiveX1.y
         done = true
@@ -62,7 +62,7 @@ function main (data) {
     }
 
     for (const positiveYElement of positiveY) {
-      if (count === 200) {
+      if (count === 199) {
         resultPart2.x = highestCountAsteroid.startValue.x + positiveYElement.x
         resultPart2.y = highestCountAsteroid.startValue.y + positiveYElement.y
         done = true
@@ -71,7 +71,7 @@ function main (data) {
     }
 
     for (const positiveXAndYElement of positiveXAndY) {
-      if (count === 200) {
+      if (count === 199) {
         resultPart2.x = highestCountAsteroid.startValue.x + positiveXAndYElement.x
         resultPart2.y = highestCountAsteroid.startValue.y + positiveXAndYElement.y
         done = true
