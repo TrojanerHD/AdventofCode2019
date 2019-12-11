@@ -4,5 +4,7 @@
   "main": "index.js",
   "author": "Trojaner",
   "license": "MIT",
-  "dependencies": {}
+  "dependencies": {
+    "lodash": "^4.17.15"
+  }
 }
