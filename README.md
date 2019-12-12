@@ -7,7 +7,7 @@ My personal solutions of the [Advent of code](https://adventofcode.com/) challen
 ### Check out the other solutions
 + Hax's [advent-of-code](https://github.com/Schlauer-Hax/advent-of-code)
 + networkException's [AdventOfCode](https://github.com/dejakobniklas/AdventOfCode)
-+ derNiklaas's [Advent-of-Code-2019](https://github.com/derNiklaas/Advent-of-Code-2019)
++ derNiklaas's [Advent-of-Code](https://github.com/derNiklaas/Advent-of-Code)
 + LeMoonStar's [AdventOfCode2019Solutions](https://github.com/LeMoonStar/AdventOfCode2019Solutions)
 + DCDragonCoder's [AdventOfCode2019](https://github.com/DragonCoder01/AdventOfCode2019)
 + FeldiM's [AdventOfCode19](https://github.com/feldim2425/AdventOfCode19)
