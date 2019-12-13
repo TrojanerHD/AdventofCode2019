@@ -52,6 +52,7 @@ stdin.on('data', key => {
       process.exit() // ctrl-c
       break
     case '\r':
+      console.time('[Year 2019, Day 13] Calculation time')
       if (gameRunningOrCalculating) return
       gameRunningOrCalculating = true
       let done = false
@@ -98,11 +99,9 @@ function keyPressed (key) {
 }
 
 let twoBeginningCount
-let startPerformance
 module.exports = main
 
 function main (data) {
-  console.time('2019day13')
   process.stdout.write('[Play]  Calculate  Visualize ')
   if (!inputData) inputData = data
 }
@@ -198,15 +197,18 @@ function start (game, visualize) {
     }
     console.log(`[Year 2019, Day 13, Part 1] The number of block tiles when the game exits is: ${blockTileCount}`)
     console.log(`[Year 2019, Day 13, Part 2] The score is: ${score}`)
-    console.log(`The calculation took ${console.timeEnd('2019day13') / 60} seconds`)
+    console.timeEnd('[Year 2019, Day 13] Calculation time')
     return true
   }
   if (!visualize) {
     process.stdout.clearLine()
     process.stdout.cursorTo(0)
+    process.stdout.moveCursor(0, -1)
+    process.stdout.clearLine()
+    process.stdout.cursorTo(0)
     const twoCount = result.match(/2/g).length
     if (!twoBeginningCount) twoBeginningCount = twoCount
-    process.stdout.write(`${Math.round((twoBeginningCount - twoCount) / twoBeginningCount * 100)}% complete`)
+    process.stdout.write(`${Math.round((twoBeginningCount - twoCount) / twoBeginningCount * 100)}% complete\n`)
   }
   return false
 }
