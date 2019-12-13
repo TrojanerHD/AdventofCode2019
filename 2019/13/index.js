@@ -66,10 +66,6 @@ stdin.on('data', key => {
           while (!done) done = start(false, true)
           break
       }
-      if (mode) start(true)
-      else {
-
-      }
       break
     case 'r':
       keyPressed('reset')
@@ -80,13 +76,9 @@ stdin.on('data', key => {
 let linesToClear = 0
 
 function keyPressed (key) {
-  process.stdout.moveCursor(0, -linesToClear)
-  process.stdout.clearLine()
-  process.stdout.cursorTo(0)
   if (key === 'reset') {
     intCode = undefined
-    main(inputData)
-    process.stdout.clearLine()
+    start(true, true)
     return
   }
   switch (key) {
@@ -102,13 +94,15 @@ function keyPressed (key) {
   }
   intCode._array[intCode._requiresInput] = key
 
-  start(true)
-  process.stdout.clearLine()
+  start(true, true)
 }
 
+let twoBeginningCount
+let startPerformance
 module.exports = main
 
 function main (data) {
+  console.time('2019day13')
   process.stdout.write('[Play]  Calculate  Visualize ')
   if (!inputData) inputData = data
 }
@@ -129,22 +123,27 @@ function start (game, visualize) {
   for (let i = 0; i < intCode._output.length; i += 3) {
     const x = intCode._output[i]
     const y = intCode._output[i + 1]
-    const tileId = intCode._output[i + 2]
+    let tileId = intCode._output[i + 2]
     if (tileId === 2) blockTileCount++
-    if (x === -1 && y === 0) score = tileId
-    positions.push({ x, y, tileId })
+    if (x === -1 && y === 0) {
+      score = tileId
+      continue
+    }
+    let secondPositionExists = false
+    for (let j = 0; j < positions.length; j++) {
+      const secondPosition = positions[j]
+      if (x === secondPosition.x && y === secondPosition.y) {
+        secondPosition.tileId = tileId
+        secondPositionExists = true
+      }
+    }
+    if (!secondPositionExists)
+      positions.push({ x, y, tileId })
   }
   let maxX = 0
   let maxY = 0
-  for (let i = 0; i < positions.length; i++) {
-    let position = positions[i]
-    for (let j = 0; j < positions.length; j++) {
-      if (i === j) continue
-      const secondPosition = positions[j]
-      if (position.x === secondPosition.x && position.y === secondPosition.y) {
-        position.tileId = secondPosition.tileId
-      }
-    }
+
+  for (const position of positions) {
     const { x, y } = position
     if (maxX < x) maxX = x
     if (maxY < y) maxY = y
@@ -176,14 +175,17 @@ function start (game, visualize) {
   if (positionOfFour.x > positionOfThree.x) intCode._array[intCode._requiresInput] = 1
   else if (positionOfFour.x < positionOfThree.x) intCode._array[intCode._requiresInput] = -1
   else if (positionOfFour.x === positionOfThree.x) intCode._array[intCode._requiresInput] = 0
-  process.stdout.moveCursor(0, -linesToClear)
-  process.stdout.clearLine()
-  process.stdout.cursorTo(0)
+  while (-linesToClear !== 0) {
+    process.stdout.moveCursor(0, -1)
+    process.stdout.clearLine()
+    process.stdout.cursorTo(0)
+    linesToClear--
+  }
   if (visualize) {
     process.stdout.write(`${result}\n`)
     process.stdout.write(`Score: ${score}\n`)
     if (game)
-      process.stdout.write('Controller direction: (Right 1 | Neutral 2 | Left 3 | Reset r)\n')
+      process.stdout.write('Controller direction: (Right arrow (right) | Up/down arrow (neutral) | Left Arrow (left) | R button (reset)\n')
     linesToClear = 4 + maxY
   }
 
@@ -196,7 +198,15 @@ function start (game, visualize) {
     }
     console.log(`[Year 2019, Day 13, Part 1] The number of block tiles when the game exits is: ${blockTileCount}`)
     console.log(`[Year 2019, Day 13, Part 2] The score is: ${score}`)
+    console.log(`The calculation took ${console.timeEnd('2019day13') / 60} seconds`)
     return true
+  }
+  if (!visualize) {
+    process.stdout.clearLine()
+    process.stdout.cursorTo(0)
+    const twoCount = result.match(/2/g).length
+    if (!twoBeginningCount) twoBeginningCount = twoCount
+    process.stdout.write(`${Math.round((twoBeginningCount - twoCount) / twoBeginningCount * 100)}% complete`)
   }
   return false
 }
