@@ -17,6 +17,7 @@ class day {
     process.chdir(`./${this._year}/${this._day}`)
     const toLog = require(`./${this._year}/${this._day}/index`)(data)
     process.chdir('../../')
+    if (!toLog) return
     for (let i = 0; i < toLog.length; i++) {
       const log = toLog[i]
       this.logger(i + 1, log.message, log.value)
