@@ -53,7 +53,7 @@ class Reactions {
             for (let i = 0; i < this._chemicals.length; i++) {
               const chemical = this._chemicals[i]
               if (tempSearchChemical.chemical === chemical.chemical) {
-                tempSearchChemical.count = tempSearchChemical.count - parseInt(chemical.count)
+                tempSearchChemical.count = tempSearchChemical.count - chemical.count
               }
             }
             while (tempSearchChemical.count > count) {
