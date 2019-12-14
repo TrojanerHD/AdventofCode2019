@@ -35,17 +35,18 @@ class Reactions {
   generateFuel (searchChemicals) {
     for (const searchChemical of searchChemicals) {
       let chemicalFound = false
-      for (const reaction of this._reactions) {
-        chemicalFound = this.checkForEnoughChemicals(searchChemical)
-        if (chemicalFound) break
-        if (searchChemical.chemical === 'ORE') {
-          this._oreCount += searchChemical.count
-          console.log(`-${searchChemical.count} ${searchChemical.chemical}`)
-          chemicalFound = true
-          break
-        }
-        if (chemicalFound) break
 
+      chemicalFound = this.checkForEnoughChemicals(searchChemical)
+      if (chemicalFound) continue
+      if (searchChemical.chemical === 'ORE') {
+        this._oreCount += searchChemical.count
+        console.log(`-${searchChemical.count} ${searchChemical.chemical}`)
+        chemicalFound = true
+        continue
+      }
+      if (chemicalFound) continue
+
+      for (const reaction of this._reactions) {
         for (const result of reaction.chemical) {
           if (searchChemical.chemical === result.chemical) {
             let count = 0
@@ -59,12 +60,17 @@ class Reactions {
             while (tempSearchChemical.count > count) {
               this.generateFuel(reaction.ingredients)
               const tempResult = _.cloneDeep(result)
-              this.pushToChemicals(tempResult)
               count += tempResult.count
+              this.pushToChemicals(tempResult)
               console.log(`+${tempResult.count} ${searchChemical.chemical}`)
             }
+            this.checkForEnoughChemicals(searchChemical)
             chemicalFound = true
+            break
           }
+        }
+        if (chemicalFound) {
+          break
         }
       }
     }
@@ -88,7 +94,6 @@ class Reactions {
       const chemical = this._chemicals[i]
       if (chemical.count >= searchChemical.count && searchChemical.chemical === chemical.chemical) {
         this._chemicals[i].count = chemical.count - searchChemical.count
-        console.log(`-${searchChemical.count} ${chemical.chemical}`)
         return true
       }
     }
