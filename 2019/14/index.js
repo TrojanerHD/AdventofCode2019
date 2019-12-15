@@ -1,28 +1,47 @@
 const _ = require('lodash')
+const fs = require('fs')
 
 module.exports = main
 
 function main (data) {
-  const reactions = new Reactions()
+  let reactions = new Reactions()
   const recipes = data.split(/\r?\n/g)
+  let tempReactions = []
   for (const recipe of recipes) {
     const ingredients = recipe.split(' => ')[0].split(', ')
     const ingredientsArray = []
     for (let i = 0; i < ingredients.length; i++) {
       const ingredient = ingredients[i]
-      ingredientsArray.push({ count: parseInt(ingredient.split(' ')[0]), chemical: ingredient.split(' ')[1] })
+      ingredientsArray.push({
+        count: parseInt(ingredient.split(' ')[0]),
+        chemical: ingredient.split(' ')[1],
+      })
     }
     const results = recipe.split(' => ')[1].split(', ')
     const resultsArray = []
     for (let i = 0; i < results.length; i++) {
       const result = results[i]
-      resultsArray.push({ count: parseInt(result.split(' ')[0]), chemical: result.split(' ')[1] })
+      resultsArray.push({
+        count: parseInt(result.split(' ')[0]),
+        chemical: result.split(' ')[1],
+      })
     }
-    reactions._reactions.push({ ingredients: ingredientsArray, chemical: resultsArray })
+    tempReactions.push(
+      { ingredients: ingredientsArray, chemical: resultsArray })
   }
+  reactions._reactions = tempReactions
   reactions.generateFuel([{ count: 1, chemical: 'FUEL' }])
   console.log(reactions._chemicals)
   console.log(reactions._oreCount)
+  let count = 1
+  reactions = new Reactions()
+  while (reactions._oreCount < 1000000000000) {
+    reactions._reactions = tempReactions
+    reactions.generateFuel([{ count, chemical: 'FUEL' }])
+    count++
+  }
+  fs.writeFileSync('./result.txt', (count - 1).toString())
+  console.log(count - 1)
 }
 
 class Reactions {
@@ -40,7 +59,6 @@ class Reactions {
       if (chemicalFound) continue
       if (searchChemical.chemical === 'ORE') {
         this._oreCount += searchChemical.count
-        console.log(`-${searchChemical.count} ${searchChemical.chemical}`)
         chemicalFound = true
         continue
       }
@@ -54,7 +72,8 @@ class Reactions {
             for (let i = 0; i < this._chemicals.length; i++) {
               const chemical = this._chemicals[i]
               if (tempSearchChemical.chemical === chemical.chemical) {
-                tempSearchChemical.count = tempSearchChemical.count - chemical.count
+                tempSearchChemical.count = tempSearchChemical.count -
+                  chemical.count
               }
             }
             while (tempSearchChemical.count > count) {
@@ -62,7 +81,6 @@ class Reactions {
               const tempResult = _.cloneDeep(result)
               count += tempResult.count
               this.pushToChemicals(tempResult)
-              console.log(`+${tempResult.count} ${searchChemical.chemical}`)
             }
             this.checkForEnoughChemicals(searchChemical)
             chemicalFound = true
@@ -92,7 +110,8 @@ class Reactions {
   checkForEnoughChemicals (searchChemical) {
     for (let i = 0; i < this._chemicals.length; i++) {
       const chemical = this._chemicals[i]
-      if (chemical.count >= searchChemical.count && searchChemical.chemical === chemical.chemical) {
+      if (chemical.count >= searchChemical.count && searchChemical.chemical ===
+        chemical.chemical) {
         this._chemicals[i].count = chemical.count - searchChemical.count
         return true
       }
