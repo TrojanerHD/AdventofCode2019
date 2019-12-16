@@ -9,7 +9,7 @@ let mode = 'play'
 let gameRunningOrCalculating = false
 let inputData
 let intCode
-let droid = { x: 1, y: 1, tile: 'D' }
+let droid = { x: 10, y: 10, tile: 'D' }
 let lastKey
 let coordinates = []
 
@@ -128,10 +128,10 @@ function start (game, visualize) {
   }
   let blockTileCount = 0
   intCode.parse()
-  let maxX = Number.NEGATIVE_INFINITY
-  let maxY = Number.NEGATIVE_INFINITY
-  let minX = Infinity
-  let minY = Infinity
+  let maxX = 20
+  let maxY = 20
+  let minX = 0
+  let minY = 0
   let result = '\n'
   const searchedCoordinate = _.clone(droid)
   switch (lastKey) {
@@ -158,12 +158,24 @@ function start (game, visualize) {
       searchedCoordinate.tile = '#'
       break
     case 1:
-      searchedCoordinate.tile = 'D'
-      droid.x = searchedCoordinate.x
-      droid.y = searchedCoordinate.y
-      for (let i = 0; i < coordinates.length; i++) {
-        let coordinate = coordinates[i]
-        if (coordinate.tile === 'D' && !(searchedCoordinate.x === coordinate.x && searchedCoordinate.y === coordinate.y)) coordinate.tile = '.'
+      searchedCoordinate.tile = '.'
+      switch (lastKey) {
+        case 1:
+          for (const coordinate of coordinates) coordinate.y += 1
+          searchedCoordinate.y += 1
+          break
+        case 2:
+          for (const coordinate of coordinates) coordinate.y -= 1
+          searchedCoordinate.y -= 1
+          break
+        case 3:
+          for (const coordinate of coordinates) coordinate.x += 1
+          searchedCoordinate.x += 1
+          break
+        case 4:
+          for (const coordinate of coordinates) coordinate.x -= 1
+          searchedCoordinate.x -= 1
+          break
       }
       break
     case 2:
@@ -178,31 +190,29 @@ function start (game, visualize) {
   }
   if (!alreadyExists)
     coordinates.push(searchedCoordinate)
-  else if (searchedCoordinate.tile === 'D') {
-    for (const coordinate of coordinates) {
-      if (coordinate.x === searchedCoordinate.x && coordinate.y === searchedCoordinate.y) coordinate.tile = 'D'
-    }
-  }
 
-  for (const coordinate of coordinates) {
-    if (coordinate.x < minX) minX = coordinate.x
-    if (coordinate.y < minY) minY = coordinate.y
-    if (coordinate.x > maxX) maxX = coordinate.x
-    if (coordinate.y > maxY) maxY = coordinate.y
-  }
+  // for (const coordinate of coordinates) {
+  //   if (coordinate.x < minX) minX = coordinate.x
+  //   if (coordinate.y < minY) minY = coordinate.y
+  //   if (coordinate.x > maxX) maxX = coordinate.x
+  //   if (coordinate.y > maxY) maxY = coordinate.y
+  // }
 
   let countX = minX
   let countY = minY
 
   while (countY !== maxY + 1) {
-    let coordinateExists = false
-    for (const coordinate of coordinates) {
-      if (countX === coordinate.x && countY === coordinate.y) {
-        result += coordinate.tile
-        coordinateExists = true
+    if (countY === 10 && countX === 10) result += 'D'
+    else {
+      let coordinateExists = false
+      for (const coordinate of coordinates) {
+        if (countX === coordinate.x && countY === coordinate.y) {
+          result += coordinate.tile
+          coordinateExists = true
+        }
       }
+      if (!coordinateExists) result += ' '
     }
-    if (!coordinateExists) result += ' '
     countX++
     if (countX === maxX + 1) {
       countX = minX
