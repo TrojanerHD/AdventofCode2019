@@ -57,51 +57,46 @@ class Reactions {
         this._oreCount += searchChemical.count
         continue
       }
-      for (const chemical of this._chemicals) {
-        if (searchChemical.chemical !== chemical.chemical || chemical.count < searchChemical.count) continue
+      const chemical = this._chemicals.find(element => searchChemical.chemical === element.chemical && element.count >= searchChemical.count)
+      if (chemical) {
         chemical.count -= searchChemical.count
         chemicalFound = true
-        break
       }
       if (chemicalFound) continue
 
       for (const reaction of this._reactions) {
-        for (const result of reaction.chemical) {
-          if (searchChemical.chemical !== result.chemical) continue
-          let count = 0
-          const tempSearchChemical = _.cloneDeep(searchChemical)
-          for (const chemical of this._chemicals) if (tempSearchChemical.chemical === chemical.chemical) {
-            tempSearchChemical.count -= chemical.count
-            break
-          }
-          while (tempSearchChemical.count > count) {
-            this.generateFuel(reaction.ingredients)
-            const tempResult = _.cloneDeep(result)
-            count += tempResult.count
-            this.pushToChemicals(tempResult)
-          }
-
-          for (const chemical of this._chemicals) {
-            if (searchChemical.chemical !== chemical.chemical) continue
-            chemical.count -= searchChemical.count
-            chemicalFound = true
-            break
-          }
-          break
+        const result = reaction.chemical.find(element => searchChemical.chemical === element.chemical)
+        if (!result) continue
+        let count = 0
+        const tempSearchChemical = _.clone(searchChemical)
+        let searchChemicalInChemicals = this.findChemicalInChemicals(searchChemical)
+        if (searchChemicalInChemicals) {
+          tempSearchChemical.count -= searchChemicalInChemicals.count
         }
-        if (chemicalFound) break
+        while (tempSearchChemical.count > count) {
+          this.generateFuel(reaction.ingredients)
+          count += result.count
+          this.pushToChemicals(result)
+        }
+        searchChemicalInChemicals = this.findChemicalInChemicals(searchChemical)
+
+        if (!searchChemicalInChemicals) continue
+        searchChemicalInChemicals.count -= searchChemical.count
+        break
       }
     }
   }
 
   pushToChemicals (result) {
-    let alreadyInChemicals = false
-    for (const chemical of this._chemicals) {
-      if (result.chemical !== chemical.chemical) continue
-      chemical.count += result.count
-      alreadyInChemicals = true
-      break
+    const chemical = this._chemicals.find(element => element.chemical === result.chemical)
+    if (!chemical) {
+      this._chemicals.push(_.clone(result))
+      return
     }
-    if (!alreadyInChemicals) this._chemicals.push(result)
+    chemical.count += result.count
+  }
+
+  findChemicalInChemicals (chemical) {
+    return this._chemicals.find(element => element.chemical === chemical.chemical)
   }
 }
