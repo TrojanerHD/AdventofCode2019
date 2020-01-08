@@ -30,17 +30,14 @@ function main (data) {
   }
   reactions._reactions = tempReactions
   reactions.generateFuel([{ count: 1, chemical: 'FUEL' }])
-  console.log(reactions._chemicals)
   console.log(reactions._oreCount)
-  let count = 1
   reactions = new Reactions()
-  while (reactions._oreCount < 1000000000000) {
-    reactions._reactions = tempReactions
-    reactions.generateFuel([{ count, chemical: 'FUEL' }])
-    count++
+  reactions._reactions = tempReactions
+  while (!reactions._done) {
+    reactions.generateFuel([{ count: 1, chemical: 'FUEL' }], 1000000000000)
   }
-  fs.writeFileSync('./result.txt', (count - 1).toString())
-  console.log(count - 1)
+  fs.writeFileSync('./result.txt', (reactions._fuelCount - 1).toString())
+  console.log(reactions._fuelCount - 1)
 }
 
 class Reactions {
@@ -48,33 +45,38 @@ class Reactions {
     this._chemicals = []
     this._reactions = []
     this._oreCount = 0
+    this._done = false
+    this._fuelCount = 0
   }
 
-  generateFuel (searchChemicals) {
+  generateFuel (searchChemicals, maximumOreCount) {
     for (const searchChemical of searchChemicals) {
-      let chemicalFound = false
+      if (searchChemical.chemical === 'FUEL') this._fuelCount += searchChemical.count
       if (searchChemical.chemical === 'ORE') {
         this._oreCount += searchChemical.count
+        if (maximumOreCount && this._oreCount > maximumOreCount) {
+          this._done = true
+        }
         continue
       }
       const chemical = this._chemicals.find(element => searchChemical.chemical === element.chemical && element.count >= searchChemical.count)
       if (chemical) {
         chemical.count -= searchChemical.count
-        chemicalFound = true
+        continue
       }
-      if (chemicalFound) continue
 
       for (const reaction of this._reactions) {
         const result = reaction.chemical.find(element => searchChemical.chemical === element.chemical)
         if (!result) continue
         let count = 0
-        const tempSearchChemical = _.clone(searchChemical)
+        let searchChemicalCount = _.clone(searchChemical).count
+        // If there are already ores in the chemical stock, delete them from the count of 'required ores'
         let searchChemicalInChemicals = this.findChemicalInChemicals(searchChemical)
         if (searchChemicalInChemicals) {
-          tempSearchChemical.count -= searchChemicalInChemicals.count
+          searchChemicalCount -= searchChemicalInChemicals.count
         }
-        while (tempSearchChemical.count > count) {
-          this.generateFuel(reaction.ingredients)
+        while (searchChemicalCount > count) {
+          this.generateFuel(reaction.ingredients, maximumOreCount)
           count += result.count
           this.pushToChemicals(result)
         }
