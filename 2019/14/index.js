@@ -1,5 +1,6 @@
 const _ = require('lodash')
 const fs = require('fs')
+const readline = require('readline');
 
 module.exports = main
 
@@ -54,6 +55,12 @@ class Reactions {
       if (searchChemical.chemical === 'FUEL') this._fuelCount += searchChemical.count
       if (searchChemical.chemical === 'ORE') {
         this._oreCount += searchChemical.count
+        if (maximumOreCount && this._percent !== (this._oreCount / maximumOreCount * 100).toFixed(2)) {
+          readline.clearLine(process.stdout);
+          readline.cursorTo(process.stdout, 0);
+          this._percent = (this._oreCount / maximumOreCount * 100).toFixed(2)
+          process.stdout.write(`Finished: ${this._percent}%`)
+        }
         if (maximumOreCount && this._oreCount > maximumOreCount) {
           this._done = true
         }
@@ -91,11 +98,11 @@ class Reactions {
 
   pushToChemicals (result) {
     const chemical = this._chemicals.find(element => element.chemical === result.chemical)
-    if (!chemical) {
-      this._chemicals.push(_.clone(result))
+    if (chemical) {
+      chemical.count += result.count
       return
     }
-    chemical.count += result.count
+    this._chemicals.push(_.clone(result))
   }
 
   findChemicalInChemicals (chemical) {
