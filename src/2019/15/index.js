@@ -72,6 +72,7 @@ stdin.on('data', key => {
           while (!done) done = start(false, false)
           break
         case 'visualize':
+          lastKey = 1
           while (!done) done = start(false, true)
           break
       }
@@ -156,6 +157,17 @@ function start (game, visualize) {
   switch (intCode._output[intCode._output.length - 1]) {
     case 0:
       searchedCoordinate.tile = '#'
+      switch (lastKey) {
+        case 1:
+        case 2:
+        case 3:
+          lastKey++
+          break
+        case 4:
+        case undefined:
+          lastKey = 1
+          break
+      }
       break
     case 1:
       searchedCoordinate.tile = '.'
@@ -190,13 +202,6 @@ function start (game, visualize) {
   }
   if (!alreadyExists)
     coordinates.push(searchedCoordinate)
-
-  // for (const coordinate of coordinates) {
-  //   if (coordinate.x < minX) minX = coordinate.x
-  //   if (coordinate.y < minY) minY = coordinate.y
-  //   if (coordinate.x > maxX) maxX = coordinate.x
-  //   if (coordinate.y > maxY) maxY = coordinate.y
-  // }
 
   let countX = minX
   let countY = minY

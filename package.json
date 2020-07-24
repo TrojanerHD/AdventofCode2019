@@ -7,5 +7,19 @@
   "dependencies": {
     "lodash": "^4.17.15",
     "readline-sync": "^1.4.10"
+  },
+  "devDependencies": {
+    "@types/node": "^13.5.1",
+    "gts": "^1.1.2",
+    "typescript": "~3.7.0"
+  },
+  "scripts": {
+    "check": "gts check",
+    "clean": "gts clean",
+    "compile": "tsc -p .",
+    "fix": "gts fix",
+    "prepare": "yarn run compile",
+    "pretest": "yarn run compile",
+    "posttest": "yarn run check"
   }
 }
