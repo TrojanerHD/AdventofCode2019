@@ -1,8 +1,6 @@
 const _ = require('lodash')
 
-module.exports = main
-
-function main (data) {
+export function main (data) {
   const moons = []
   const steps = []
 
@@ -15,7 +13,7 @@ function main (data) {
 
   let totalEnergy = 0
   let count = 0
-  const countOnRepeat = {}
+  const countOnRepeat = {x: undefined, y: undefined, z: undefined}
   while (true) {
     for (let i = 0; i < moons.length; i++) {
       const moon = moons[i]

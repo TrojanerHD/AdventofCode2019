@@ -1,5 +1,5 @@
 const stdin = process.stdin
-stdin.setRawMode(true)
+if (process.stdin.isTTY) stdin.setRawMode(true)
 stdin.resume()
 stdin.setEncoding('utf8')
 
@@ -9,13 +9,13 @@ let inputData
 let intCode
 
 stdin.on('data', key => {
-  switch (key) {
+  switch (key.toString()) {
     case '\u001B\u005B\u0043':
       if (gameRunningOrCalculating) {
         keyPressed('right')
         return
       }
-      process.stdout.clearLine()
+      process.stdout.clearLine(1)
       process.stdout.cursorTo(0)
       switch (mode) {
         case 'play':
@@ -32,7 +32,7 @@ stdin.on('data', key => {
         keyPressed('left')
         return
       }
-      process.stdout.clearLine()
+      process.stdout.clearLine(1)
       process.stdout.cursorTo(0)
       switch (mode) {
         case 'calculate':
@@ -99,9 +99,8 @@ function keyPressed (key) {
 }
 
 let twoBeginningCount
-module.exports = main
 
-function main (data) {
+export function main (data) {
   process.stdout.write('[Play]  Calculate  Visualize ')
   if (!inputData) inputData = data
 }
@@ -110,7 +109,7 @@ function start (game, visualize) {
   const data = inputData
   if (game) {
     process.stdout.moveCursor(0, -1)
-    process.stdout.clearLine()
+    process.stdout.clearLine(1)
   }
   if (!intCode || !intCode._requiresInput) {
     intCode = new IntCode(data.split(','))
@@ -176,7 +175,7 @@ function start (game, visualize) {
   else if (positionOfFour.x === positionOfThree.x) intCode._array[intCode._requiresInput] = 0
   while (-linesToClear !== 0) {
     process.stdout.moveCursor(0, -1)
-    process.stdout.clearLine()
+    process.stdout.clearLine(1)
     process.stdout.cursorTo(0)
     linesToClear--
   }
@@ -201,10 +200,10 @@ function start (game, visualize) {
     return true
   }
   if (!visualize) {
-    process.stdout.clearLine()
+    process.stdout.clearLine(1)
     process.stdout.cursorTo(0)
     process.stdout.moveCursor(0, -1)
-    process.stdout.clearLine()
+    process.stdout.clearLine(1)
     process.stdout.cursorTo(0)
     const twoCount = result.match(/2/g).length
     if (!twoBeginningCount) twoBeginningCount = twoCount
@@ -214,6 +213,11 @@ function start (game, visualize) {
 }
 
 class IntCode {
+  _array;
+  private _relativeBase;
+  _output;
+  private _i;
+  _requiresInput;
   constructor (array) {
     this._array = array
     this._relativeBase = 0

@@ -1,17 +1,23 @@
-module.exports = main
+export function main (data) {
 
-function main (data) {
+  const firstHalf = draw(data, 0)
+  const secondHalf = draw(data, 1)
+  return [{
+    message: 'The number of panels the robot paints at least once is',
+    value: firstHalf.pixels
+  }, { message: 'The produced image', value: secondHalf.image }]
+}
+function draw(data, startColor) {
   const coordinates = []
-
   const robot = { x: 0, y: 0, direction: 0 }
   const intCode = new IntCode(data.split(','))
   intCode.parse()
   let outputCount = 0
   while (intCode._requiresInput) {
-    let color = outputCount === 0 ? 1 : 0
+    let color = outputCount === 0 ? startColor : 0
     let coordinateFound
     for (let i = 0; i < coordinates.length; i++) {
-      let coordinate = coordinates[i]
+      const coordinate = coordinates[i]
       if (coordinate.x === robot.x && coordinate.y === robot.y) {
         color = coordinate.color
         coordinateFound = i
@@ -77,14 +83,16 @@ function main (data) {
       result += '\n'
     }
   }
-
-  return [{
-    message: 'The number of panels the robot paints at least once is',
-    value: coordinates.length
-  }, { message: 'The produced image', value: result }]
+  return {pixels: coordinates.length, image: result};
 }
 
+
 class IntCode {
+  _array;
+  private _relativeBase;
+  _output;
+   _i;
+  _requiresInput;
   constructor (array) {
     this._array = array
     this._relativeBase = 0

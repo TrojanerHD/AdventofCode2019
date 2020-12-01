@@ -1,8 +1,6 @@
 const _ = require('lodash')
 
-module.exports = main
-
-function main (data) {
+export function main (data) {
   const values = []
   let y = 0
   for (const row of data.split(/\r?\n/g)) {
@@ -17,7 +15,7 @@ function main (data) {
 
   let asteroids = calculateAsteroids(values)
   let highestCount = 0
-  let highestCountAsteroid = {}
+  let highestCountAsteroid = {visibleAsteroids: undefined, startValue: undefined, x: undefined, y: undefined}
   for (const asteroid of asteroids) if (asteroid.visibleAsteroids.length > highestCount) {
     highestCountAsteroid = asteroid
     highestCount = asteroid.visibleAsteroids.length
@@ -130,7 +128,7 @@ function calculateAsteroids (values) {
             // console.log(`Removed ${asteroid.x}|${asteroid.y}`)
             visibleAsteroids.splice(k, 1)
           } else
-            skip = true
+              skip = true
         }
       }
       if (skip) {

@@ -46,4 +46,4 @@ class Day {
   }
 }
 
-new Day(2019, 7).init();
+new Day(2019, 14).init();

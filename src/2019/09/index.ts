@@ -1,6 +1,4 @@
-module.exports = main
-
-function main (data) {
+export function main (data) {
   const results = []
   for (const input of ['1', '2']) {
     const intcode = new IntCode(data.split(','), input)
@@ -14,6 +12,10 @@ function main (data) {
 }
 
 class IntCode {
+  private _array;
+  private _input;
+  private _relativeBase;
+  _output;
   constructor (array, input) {
     this._array = array
     this._input = input

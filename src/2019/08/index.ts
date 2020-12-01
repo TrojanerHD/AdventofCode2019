@@ -1,6 +1,4 @@
-module.exports = main
-
-function main (data) {
+export function main (data) {
   const layers = data.match(/.{1,150}/g)
   let zeroCount = { count: Infinity, layer: undefined }
   for (const layer of layers) {

@@ -2,9 +2,7 @@ const _ = require('lodash')
 const fs = require('fs')
 const readline = require('readline');
 
-module.exports = main
-
-function main (data) {
+export function main (data) {
   let reactions = new Reactions()
   const recipes = data.split(/\r?\n/g)
   let tempReactions = []
@@ -42,6 +40,12 @@ function main (data) {
 }
 
 class Reactions {
+  private _chemicals: any[];
+  _reactions: any[];
+  _done: any;
+  _fuelCount: number;
+  _percent: string;
+  _oreCount: number;
   constructor () {
     this._chemicals = []
     this._reactions = []
@@ -50,7 +54,7 @@ class Reactions {
     this._fuelCount = 0
   }
 
-  generateFuel (searchChemicals, maximumOreCount) {
+  generateFuel (searchChemicals, maximumOreCount = undefined) {
     for (const searchChemical of searchChemicals) {
       if (searchChemical.chemical === 'FUEL') this._fuelCount += searchChemical.count
       if (searchChemical.chemical === 'ORE') {
