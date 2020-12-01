@@ -1,14 +1,13 @@
-# Advent of Code
-My personal solutions of the [Advent of code](https://adventofcode.com/) challenge
-## 2020
-[![Language](https://img.shields.io/badge/Language-TypeScript-blue)](https://www.typescriptlang.org/)
-[![Environment](https://img.shields.io/badge/Environment-Node.js-brightgreen)](https://nodejs.org/en/)
-[![Days completed](https://img.shields.io/badge/Days%20completed-0-red)](https://github.com/TrojanerHD/AdventofCode/tree/main/src/2020)
-## 2019
+# Advent of Code 2019
+
+My personal solutions of the [Advent of code 2019](https://adventofcode.com/2019) challenge
+
 [![Language](https://img.shields.io/badge/Language-TypeScript-blue)](https://www.typescriptlang.org/)
 [![Environment](https://img.shields.io/badge/Environment-Node.js-brightgreen)](https://nodejs.org/en/)
 [![Days completed](https://img.shields.io/badge/Days%20completed-13-red)](https://github.com/TrojanerHD/AdventofCode/tree/main/src/2019)
+
 ### Check out the other solutions
+
 <table>
     <thead>
         <tr>
@@ -18,6 +17,11 @@ My personal solutions of the [Advent of code](https://adventofcode.com/) challen
         </tr>
     </thead>
     <tbody>
+        <tr>
+            <td>Trojaner</td>
+            <td>➡ <a href="https://github.com/TrojanerHD/AdventofCode2019">TrojanerHD/AdventofCode2019</a></td>
+            <td><a href="https://github.com/TrojanerHD/AdventofCode2020">TrojanerHD/AdventofCode2020</a></td>
+        </tr>
         <tr>
             <td>Hax</td>
             <td><a href="https://github.com/Schlauer-Hax/advent-of-code">Schlauer-Hax/advent-of-code</a></td>
