@@ -16,10 +16,10 @@ My personal solutions of the [Advent of code 2019](https://adventofcode.com/2019
             <th>2020</th>
         </tr>
     </thead>
-    <tbody>
+   <tbody>
         <tr>
             <td>Trojaner</td>
-            <td>➡ <a href="https://github.com/TrojanerHD/AdventofCode2019">TrojanerHD/AdventofCode2019</a></td>
+            <td>➡️ <a href="https://github.com/TrojanerHD/AdventofCode2019">TrojanerHD/AdventofCode2019</a></td>
             <td><a href="https://github.com/TrojanerHD/AdventofCode2020">TrojanerHD/AdventofCode2020</a></td>
         </tr>
         <tr>
@@ -58,7 +58,12 @@ My personal solutions of the [Advent of code 2019](https://adventofcode.com/2019
         <tr>
             <td>Sammy</td>
             <td></td>
-            <td><a href="https://github.com/1Turtle/AoC20">1Turtle/AoC20</a></td>
+            <td><a href="https://github.com/1Turtle/AdventOfCode2020">1Turtle/AdventOfCode2020</a></td>
+        </tr>
+        <tr>
+            <td>Jonas</td>
+            <td><a href="https://github.com/joblo2213/AdventOfCode2019">joblo2213/AdventOfCode2019</a></td>
+            <td><a href="https://github.com/joblo2213/AdventOfCode2020">joblo2213/AdventOfCode2020</a></td>
         </tr>
     </tbody>
 </table>
