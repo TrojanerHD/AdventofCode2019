@@ -65,5 +65,10 @@ My personal solutions of the [Advent of code 2019](https://adventofcode.com/2019
             <td><a href="https://github.com/joblo2213/AdventOfCode2019">joblo2213/AdventOfCode2019</a></td>
             <td><a href="https://github.com/joblo2213/AdventOfCode2020">joblo2213/AdventOfCode2020</a></td>
         </tr>
+        <tr>
+            <td>Gewi413</td>
+            <td></td>
+            <td><a href="https://github.com/Gewi413/AdventOfCode">Gewi413/AdventOfCode</a></td>
+        </tr>
     </tbody>
 </table>
