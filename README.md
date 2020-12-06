@@ -24,8 +24,7 @@ My personal solutions of the [Advent of code 2019](https://adventofcode.com/2019
         </tr>
         <tr>
             <td>Hax</td>
-            <td><a href="https://github.com/Schlauer-Hax/advent-of-code">Schlauer-Hax/advent-of-code</a></td>
-            <td></td>
+            <td colspan=2 align="center"><a href="https://github.com/Schlauer-Hax/advent-of-code">Schlauer-Hax/advent-of-code</a></td>
         </tr>
         <tr>
             <td>networkException</td>
