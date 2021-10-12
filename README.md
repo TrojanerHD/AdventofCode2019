@@ -11,63 +11,81 @@ My personal solutions of the [Advent of code 2019](https://adventofcode.com/2019
 <table>
     <thead>
         <tr>
-            <th>Name</th>
+            <th>name</th>
+            <th>2015</th>
             <th>2019</th>
             <th>2020</th>
         </tr>
     </thead>
-   <tbody>
+    <tbody>
         <tr>
-            <td>Trojaner</td>
-            <td>➡️ <a href="https://github.com/TrojanerHD/AdventofCode2019">TrojanerHD/AdventofCode2019</a></td>
-            <td><a href="https://github.com/TrojanerHD/AdventofCode2020">TrojanerHD/AdventofCode2020</a></td>
+            <td>trojanerhd</td>
+						<td>➡️ <a href="https://github.com/trojanerhd/adventofcode2015">adventofcode2015</a></td>
+            <td><a href="https://github.com/trojanerhd/adventofcode2019">adventofcode2019</a></td>
+            <td><a href="https://github.com/trojanerhd/adventofcode2020">adventofcode2020</a></td>
         </tr>
         <tr>
-            <td>Hax</td>
-            <td colspan=2 align="center"><a href="https://github.com/Schlauer-Hax/advent-of-code">Schlauer-Hax/advent-of-code</a></td>
+            <td>schlauer-hax</td>
+            <td colspan=3 align="center"><a href="https://github.com/schlauer-hax/advent-of-code">advent-of-code</a></td>
         </tr>
         <tr>
-            <td>networkException</td>
-            <td colspan=2 align="center"><a href="https://github.com/networkException/AdventOfCode">networkException/AdventOfCode</a></td>
-        </tr>
-        <tr>
-            <td>derNiklaas</td>
-            <td><a href="https://github.com/derNiklaas/Advent-of-Code-2019">derNiklaas/Advent-of-Code-2019</a></td>
-            <td><a href="https://github.com/derNiklaas/AoC-2020">derNiklaas/AoC-2020</a></td>
-        </tr>
-        <tr>
-            <td>LeMoonStar</td>
-            <td><a href="https://github.com/LeMoonStar/AdventOfCode2019Solutions">LeMoonStar/AdventOfCode2019Solutions</a></td>
-            <td><a href="https://github.com/LeMoonStar/AoC20">LeMoonStar/AoC20</a></td>
-        </tr>
-        <tr>
-            <td>Andreas Kohler</td>
-            <td><a href="https://github.com/andi-makes/AdventOfCode2019">andi-makes/AdventOfCode2019</a></td>
-            <td><a href="https://github.com/andi-makes/aoc2020">andi-makes/aoc2020</a></td>
-        </tr>
-        <tr>
-            <td>FeldiM</td>
-            <td><a href="https://github.com/feldim2425/AdventOfCode19">feldim2425/AdventOfCode19</a></td>
+            <td>networkexception</td>
+						<td></td>
+            <td><a href="https://github.com/networkexception/adventofcode">adventofcode</a></td>
             <td></td>
         </tr>
         <tr>
-            <td>Daan Breur</td>
-            <td colspan=2 align="center"><a href="https://github.com/daanbreur/AdventofCode">daanbreur/AdventofCode</a></td>
+            <td>derniklaas</td>
+						<td></td>
+            <td><a href="https://github.com/derniklaas/advent-of-code-2019">advent-of-code-2019</a></td>
+            <td><a href="https://github.com/derniklaas/aoc-2020">aoc-2020</a></td>
         </tr>
         <tr>
-            <td>Sammy</td>
+            <td>lemoonstar</td>
+						<td></td>
+            <td><a href="https://github.com/lemoonstar/adventofcode2019solutions">adventofcode2019solutions</a></td>
+            <td><a href="https://github.com/lemoonstar/aoc20">aoc20</a></td>
+        </tr>
+        <tr>
+            <td>andi-makes</td>
+						<td></td>
+            <td><a href="https://github.com/andi-makes/adventofcode2019">adventofcode2019</a></td>
+            <td><a href="https://github.com/andi-makes/aoc2020">aoc2020</a></td>
+        </tr>
+        <tr>
+            <td>feldim2425</td>
+						<td></td>
+            <td><a href="https://github.com/feldim2425/adventofcode19">adventofcode19</a></td>
             <td></td>
-            <td><a href="https://github.com/1Turtle/AdventOfCode2020">1Turtle/AdventOfCode2020</a></td>
         </tr>
         <tr>
-            <td>Jonas</td>
-            <td><a href="https://github.com/joblo2213/AdventOfCode2019">joblo2213/AdventOfCode2019</a></td>
-            <td><a href="https://github.com/joblo2213/AdventOfCode2020">joblo2213/AdventOfCode2020</a></td>
+            <td>dannbreur</td>
+						<td></td>
+            <td colspan=2 align="center"><a href="https://github.com/daanbreur/adventofcode">adventofcode</a></td>
         </tr>
         <tr>
-            <td>Gewi413</td>
+            <td>1turtle</td>
             <td></td>
-            <td><a href="https://github.com/Gewi413/AdventOfCode">Gewi413/AdventOfCode</a></td>
+            <td></td>
+            <td><a href="https://github.com/1turtle/adventofcode2020">adventofcode2020</a></td>
+        </tr>
+        <tr>
+            <td>joblo2213</td>
+						<td></td>
+            <td><a href="https://github.com/joblo2213/adventofcode2019">adventofcode2019</a></td>
+            <td><a href="https://github.com/joblo2213/adventofcode2020">adventofcode2020</a></td>
+        </tr>
+        <tr>
+            <td>gewi413</td>
+            <td></td>
+            <td></td>
+            <td><a href="https://github.com/gewi413/adventofcode">adventofcode</a></td>
+        </tr>
+        <tr>
+          <td>luftkeks</td>
+          <td><a href="https://github.com/luftkeks/adventofcode">adventofcode</a></td>
+          <td></td>
+          <td></td>
         </tr>
     </tbody>
 </table>
