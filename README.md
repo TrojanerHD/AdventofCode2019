@@ -20,8 +20,8 @@ My personal solutions of the [Advent of code 2019](https://adventofcode.com/2019
     <tbody>
         <tr>
             <td>trojanerhd</td>
-						<td>➡️ <a href="https://github.com/trojanerhd/adventofcode2015">adventofcode2015</a></td>
-            <td><a href="https://github.com/trojanerhd/adventofcode2019">adventofcode2019</a></td>
+						<td><a href="https://github.com/trojanerhd/adventofcode2015">adventofcode2015</a></td>
+            <td>➡️ <a href="https://github.com/trojanerhd/adventofcode2019">adventofcode2019</a></td>
             <td><a href="https://github.com/trojanerhd/adventofcode2020">adventofcode2020</a></td>
         </tr>
         <tr>
