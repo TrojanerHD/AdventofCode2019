@@ -69,7 +69,7 @@ My personal solutions of the [Advent of code 2019](https://adventofcode.com/2019
         <td></td>
       </tr>
       <tr>
-        <td>dannbreur</td>
+        <td>daanbreur</td>
         <td></td>
         <td colspan=2 align="center"><a href="https://github.com/daanbreur/AdventofCode">AdventofCode</a></td>
         <td></td>
