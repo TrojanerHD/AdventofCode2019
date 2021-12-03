@@ -82,10 +82,10 @@ My personal solutions of the [Advent of code 2019](https://adventofcode.com/2019
         <td></td>
       </tr>
       <tr>
-        <td>joblo2213</td>
+        <td>J0B10</td>
         <td></td>
-        <td><a href="https://github.com/joblo2213/AdventOfCode2019">AdventOfCode2019</a></td>
-        <td><a href="https://github.com/joblo2213/AdventOfCode2020">AdventOfCode2020</a></td>
+        <td><a href="https://github.com/J0B10/AdventOfCode2019">AdventOfCode2019</a></td>
+        <td><a href="https://github.com/J0B10/AdventOfCode2020">AdventOfCode2020</a></td>
         <td></td>
       </tr>
       <tr>
@@ -111,4 +111,3 @@ My personal solutions of the [Advent of code 2019](https://adventofcode.com/2019
       </tr>
     </tbody>
 </table>
-
