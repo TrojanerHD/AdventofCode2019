@@ -103,7 +103,7 @@ My personal solutions of the [Advent of code 2019](https://adventofcode.com/2019
         <td><a href="https://github.com/Gewi413/AdventOfCode/tree/2020">AdventOfCode/2020 (branch)</a></td>
       </tr>
       <tr>
-        <td>feldim2425</td>
+        <td>🟥feldim2425</td>
         <td></td>
         <td><a href="https://github.com/feldim2425/AdventOfCode19">AdventOfCode19</a></td>
         <td></td>
