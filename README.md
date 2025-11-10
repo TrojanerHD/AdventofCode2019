@@ -64,13 +64,13 @@ My personal solutions of the [Advent of Code 2019](https://adventofcode.com/2019
         <td>Seralius</td>
         <td></td>
         <td></td>
-        <td><a href="https://github.com/noeppi-noeppi/aoc/tree/master/2020">aoc/2020</a></td>
+        <td></td>
       </tr>
       <tr>
         <td>MelanX</td>
         <td></td>
         <td></td>
-        <td><a href="https://github.com/noeppi-noeppi/aoc/tree/master/2020">aoc/2020</a></td>
+        <td></td>
       </tr>
       <tr>
         <td>🟥networkException</td>
