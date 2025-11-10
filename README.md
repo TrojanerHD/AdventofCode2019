@@ -1,6 +1,6 @@
 # Advent of Code 2019
 
-My personal solutions of the [Advent of code 2019](https://adventofcode.com/2019) challenge
+My personal solutions of the [Advent of Code 2019](https://adventofcode.com/2019) challenge
 
 [![Language](https://img.shields.io/badge/Language-TypeScript-blue)](https://www.typescriptlang.org/)
 [![Environment](https://img.shields.io/badge/Environment-Node.js-brightgreen)](https://nodejs.org/en/)
@@ -9,7 +9,7 @@ My personal solutions of the [Advent of code 2019](https://adventofcode.com/2019
 ### Check out the other solutions
 
 ## Check out solutions from others
-**This table will scroll through the years as you click through my repositories**; *if you click on year X, the repositories of X-1, X, and X (if available) will be shown*.
+**This table will scroll through the years as you click through my repositories**; *if you click on year X, the repositories of X-1, X, and X + 1 (if available) will be shown*.
 
 <table>
     <thead>
