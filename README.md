@@ -45,8 +45,7 @@ My personal solutions of the [Advent of Code 2019](https://adventofcode.com/2019
       </tr>
       <tr>
         <td>daanbreur</td>
-        <td></td>
-        <td colspan=2 align="center"><a href="https://github.com/daanbreur/AdventofCode">AdventofCode</a></td>
+        <td colspan=3 align="center"><a href="https://github.com/daanbreur/AdventofCode">AdventofCode</a></td>
       </tr>
       <tr>
         <td>luftkeks</td>
@@ -68,6 +67,12 @@ My personal solutions of the [Advent of Code 2019](https://adventofcode.com/2019
       </tr>
       <tr>
         <td>MelanX</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Lypsilonx</td>
         <td></td>
         <td></td>
         <td></td>
